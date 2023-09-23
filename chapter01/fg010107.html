@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .navbar {
+        background-color: #f8f9fa;
+        padding: 10px;
+        display: flex;
+        justify-content: space-around;
+      }
+      .navbar a {
+        text-decoration: none;
+        color: #000;
+        padding: 8px 16px;
+      }
+      .navbar a:hover {
+        background-color: #e2e6e9;
+        color: #000;
+      }
+      .container {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+      }
+      .container div {
+        flex: 1;
+        margin: 10px;
+        background-color: #e9ecef;
+        padding: 20px;
+      }
+      .footer {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container">
+      <div>Column 1</div>
+      <div>Column 2</div>
+      <div>Column 3</div>
+    </div>
+
+    <footer class="footer">Copyright © 2023</footer>
+  </body>
+</html>
