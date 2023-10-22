@@ -1,1 +1,1 @@
-OPENAI_API_KEY = "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"  # Replace this with your API key
+OPENAI_API_KEY = ""  # Replace this with your API key
