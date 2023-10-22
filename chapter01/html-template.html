@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three Column Layout</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      nav {
+        background-color: #444;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      .main-content {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+      }
+
+      .sidebar {
+        flex-basis: 20%;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+
+      .content {
+        flex-basis: 60%;
+        background-color: #fff;
+        padding: 20px;
+      }
+
+      .aside {
+        flex-basis: 20%;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+
+      footer {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Top Navigation Bar</h1>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="main-content">
+        <div class="sidebar">
+          <h2>Sidebar</h2>
+          <p>This is the sidebar content.</p>
+        </div>
+        <div class="content">
+          <h2>Main Content</h2>
+          <p>This is the main content area.</p>
+        </div>
+        <div class="aside">
+          <h2>Aside</h2>
+          <p>This is the aside content.</p>
+        </div>
+      </div>
+      <footer>
+        <p>Footer</p>
+      </footer>
+    </div>
+  </body>
+</html>
