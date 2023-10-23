@@ -16,7 +16,7 @@ function makeMove(index) {
       isGameOver = true;
       return;
     }
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    //currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     aiMove(); // Player is X, AI is O
   }
 }
@@ -33,6 +33,14 @@ function aiMove() {
     alert('O Wins!');
     isGameOver = true;
   }
+}
+
+function setDifficulty(level) {
+  // this will set the difficulty of the AI player
+  // level is an integer between 1 and 10
+  // 1 = random move
+  // 10 = perfect move
+  // 5 = half perfect move
 }
 
 function checkWin() {
