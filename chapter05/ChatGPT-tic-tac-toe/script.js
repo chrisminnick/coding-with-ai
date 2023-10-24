@@ -1,11 +1,31 @@
 let board = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
 let isGameOver = false;
+let messageHistory = [];
+
+function startNewGame(levelOfDifficulty) {
+  board = ['', '', '', '', '', '', '', '', ''];
+  currentPlayer = 'X';
+  isGameOver = false;
+  messageHistory = [];
+  messageHistory.push({
+    role: 'user',
+    content: 'new(' + levelOfDifficulty + ')',
+  });
+  document.querySelectorAll('.cell').forEach((cell) => (cell.innerHTML = ''));
+  const response = getAIMove(messageHistory);
+  return response;
+}
 
 function makeMove(index) {
   if (board[index] === '' && !isGameOver) {
     board[index] = currentPlayer;
     document.getElementsByClassName('cell')[index].innerHTML = currentPlayer;
+    messageHistory.push({
+      role: 'user',
+      content: index.toString(),
+    });
+
     if (checkWin()) {
       alert(currentPlayer + ' Wins!');
       isGameOver = true;
@@ -16,31 +36,42 @@ function makeMove(index) {
       isGameOver = true;
       return;
     }
-    //currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    aiMove(); // Player is X, AI is O
+    aiMove(messageHistory); // Player is X, AI is O
   }
 }
 
-function aiMove() {
-  let available = [];
-  for (let i = 0; i < board.length; i++) {
-    if (board[i] === '') available.push(i);
-  }
-  let randomCell = available[Math.floor(Math.random() * available.length)];
-  board[randomCell] = 'O';
-  document.getElementsByClassName('cell')[randomCell].innerHTML = 'O';
+async function getAIMove(message) {
+  // This function will send a message to the API server
+  // The message will contain each previous move and the user's latest move
+  // The API server will return the AI's next move
+  const response = await fetch('http://localhost:3000/chat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      messages: message,
+    }),
+  });
+  const data = await response.json();
+  document.getElementById('message').innerHTML =
+    data.response.choices[0].message.content;
+  return data.response.choices[0].message.content;
+}
+
+async function aiMove(messageHistory) {
+  let move = await getAIMove(messageHistory);
+  messageHistory.push({
+    role: 'assistant',
+    content: move.toString(),
+  });
+  console.log(move);
+  board[move] = 'O';
+  document.getElementsByClassName('cell')[move].innerHTML = 'O';
   if (checkWin()) {
     alert('O Wins!');
     isGameOver = true;
   }
-}
-
-function setDifficulty(level) {
-  // this will set the difficulty of the AI player
-  // level is an integer between 1 and 10
-  // 1 = random move
-  // 10 = perfect move
-  // 5 = half perfect move
 }
 
 function checkWin() {
