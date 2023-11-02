@@ -4,6 +4,23 @@ let isGameOver = false;
 let messageHistory = [];
 let difficulty = 10;
 
+// Wait for the DOM to fully load before running the script
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Get all cells
+  let cells = document.querySelectorAll('.cell');
+
+  // Loop through all cells
+  for (let i = 0; i < cells.length; i++) {
+    // Add click event listener to each cell
+    cells[i].addEventListener('click', function () {
+      makeMove(i);
+    });
+  }
+
+  // Add click event listener to the start button
+  document.getElementById('start').addEventListener('click', startNewGame);
+});
+
 document.getElementById('difficulty').innerHTML =
   'Level of difficulty: ' + document.getElementById('slider').value;
 
