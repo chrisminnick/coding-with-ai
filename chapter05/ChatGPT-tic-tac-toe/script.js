@@ -2,19 +2,40 @@ let board = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
 let isGameOver = false;
 let messageHistory = [];
+let difficulty = 10;
 
-function startNewGame(levelOfDifficulty) {
+document.getElementById('difficulty').innerHTML =
+  'Level of difficulty: ' + document.getElementById('slider').value;
+
+document.getElementById('slider').addEventListener('change', (e) => {
+  document.getElementById('difficulty').innerHTML =
+    'Level of difficulty: ' + e.target.value;
+  difficulty = e.target.value;
+});
+async function startNewGame() {
   board = ['', '', '', '', '', '', '', '', ''];
   currentPlayer = 'X';
   isGameOver = false;
   messageHistory = [];
   messageHistory.push({
     role: 'user',
-    content: 'new(' + levelOfDifficulty + ')',
+    content: 'new',
   });
   document.querySelectorAll('.cell').forEach((cell) => (cell.innerHTML = ''));
-  const response = getAIMove(messageHistory);
-  return response;
+
+  const response = await fetch('http://localhost:3000/chat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      messages: messageHistory,
+    }),
+  });
+  const data = await response.json();
+  document.getElementById('message').innerHTML =
+    data.response.choices[0].message.content;
+  return data.response.choices[0].message.content;
 }
 
 function makeMove(index) {
@@ -41,22 +62,37 @@ function makeMove(index) {
 }
 
 async function getAIMove(message) {
-  // This function will send a message to the API server
-  // The message will contain each previous move and the user's latest move
-  // The API server will return the AI's next move
-  const response = await fetch('http://localhost:3000/chat', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      messages: message,
-    }),
-  });
-  const data = await response.json();
-  document.getElementById('message').innerHTML =
-    data.response.choices[0].message.content;
-  return data.response.choices[0].message.content;
+  /* 
+  Use the value of difficulty to decide whether to
+  query the API for a move or use a random move.
+  If difficulty is 10, always query the API
+  If difficulty is 0, always use a random move
+  If difficulty is between 0 and 10, use a random move
+  10 - difficulty percent of the time
+  and use the best move difficulty percent of the time
+*/
+  let random = Math.random();
+  if (random < difficulty / 10) {
+    const response = await fetch('http://localhost:3000/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messages: message,
+      }),
+    });
+    const data = await response.json();
+    document.getElementById('message').innerHTML =
+      data.response.choices[0].message.content;
+    return data.response.choices[0].message.content;
+  }
+  let move = Math.floor(Math.random() * 9);
+  while (board[move] !== '') {
+    move = Math.floor(Math.random() * 9);
+  }
+  document.getElementById('message').innerHTML = move.toString();
+  return move.toString();
 }
 
 async function aiMove(messageHistory) {

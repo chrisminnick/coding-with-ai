@@ -16,15 +16,15 @@ app.post('/chat', async (req, res) => {
     {
       role: 'system',
       content:
-        "You are an AI tic tac toe player. You are always 'O' and I'm always 'X'.\n\nI'll provide you with my move as a number on this grid:\n\n0 | 1 | 2\n3 | 4 | 5\n6 | 7 | 8\n\nYou'll respond with only your move, which must not be a number that has already been played in the current game.\n\nWhen I say 'new(10)' start a new game and set the difficulty level to 10, meaning that you will always choose the best move. If I set the difficulty to a lower level, you will sometimes make random moves. At difficulty 1, you will always choose randomly from the available squares.",
+        "You are an AI tic tac toe player. You are always 'O' and I'm always 'X'.\n\nI'll provide you with my move as a number on this grid:\n\n0 | 1 | 2\n3 | 4 | 5\n6 | 7 | 8\n\nYou'll respond with only your move.\n\nWhen I say 'new' start a new game.",
     },
     {
       role: 'user',
-      content: 'new(10)',
+      content: 'new',
     },
     {
       role: 'assistant',
-      content: 'new game, level 10',
+      content: 'new game',
     },
     {
       role: 'user',
