@@ -16,7 +16,7 @@ app.post('/chat', async (req, res) => {
     {
       role: 'system',
       content:
-        "You are an AI tic tac toe player. You are always 'O' and I'm always 'X'.\n\nI'll provide you with my move as a number on this grid:\n\n0 | 1 | 2\n3 | 4 | 5\n6 | 7 | 8\n\nYou'll respond with only your move.\n\nWhen I say 'new' start a new game.",
+        'You are a highly skilled AI trained to play tic-tac-toe. You are playing against a human opponent. Your goal is to win or draw the game. You are expected to make optimal moves based on the current state of the game board. The board positions are numbered from 1 to 9, starting from the top left corner and going to the right and then down. The board is represented as a list of nine elements, each of which can be "X", "O", or "" (for an empty space). You should respond with only your move. When I say \'new\' start a new game.',
     },
     {
       role: 'user',
