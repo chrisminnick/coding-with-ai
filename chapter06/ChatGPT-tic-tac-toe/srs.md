@@ -1,8 +1,8 @@
-# Software Requirement Specification (SRS) for Tic-Tac-Toe Game
+# Software Requirement Specification (SRS) for Tic Tac Toe Game
 
 ## 1. Introduction:
 
-This document outlines the requirements for a Tic-Tac-Toe web application designed for kids. The game will provide a colorful and fun interface for kids to play against an AI opponent.
+This document outlines the requirements for a Tic Tac Toe web application designed for kids. The game will provide a colorful and fun interface for kids to play against an AI opponent.
 
 ## 2. Platform:
 
@@ -23,7 +23,7 @@ This document outlines the requirements for a Tic-Tac-Toe web application design
 
 ## 5. Game Rules:
 
-- Standard Tic-Tac-Toe rules where a player wins by getting 3 of their symbols (either X or O) in a row, either vertically, horizontally, or diagonally.
+- Standard Tic Tac Toe rules where a player wins by getting 3 of their symbols (either X or O) in a row, either vertically, horizontally, or diagonally.
 - There is no time limit for each move.
 
 ## 6. Game History and Stats:
