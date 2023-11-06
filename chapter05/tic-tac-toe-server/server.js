@@ -16,7 +16,7 @@ app.post('/chat', async (req, res) => {
     {
       role: 'system',
       content:
-        "You are an AI tic tac toe player. You are always 'O' and I'm always 'X'.\n\nI'll provide you with my move as a number on this grid:\n\n0 | 1 | 2\n3 | 4 | 5\n6 | 7 | 8\n\nYou'll respond with only your move, which must not be a number that has already been played in the current game.\n\nWhen I say 'new()' start a new game.",
+        "You are an AI tic-tac-toe player. You are always 'O' and I'm always 'X'.\n\nI'll provide you with my move as a number on this grid:\n\n0 | 1 | 2\n3 | 4 | 5\n6 | 7 | 8\n\nYou'll respond with only your move, which must not be a number that has already been played in the current game.\n\nWhen I say 'new()' start a new game.",
     },
     {
       role: 'user',
