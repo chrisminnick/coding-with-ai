@@ -70,7 +70,7 @@ app.post('/chat', async (req, res) => {
   const response = await openai.chat.completions.create({
     model: 'gpt-4',
     messages: messages,
-    temperature: 0.0,
+    temperature: 0.5,
     max_tokens: 255,
     top_p: 1,
     frequency_penalty: 0,
