@@ -16,5 +16,10 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'react/jsx-indent': ['off'],
+    'react/jsx-max-props-per-line': ['off'],
+    'react/jsx-one-expression-per-line': ['off'],
+    'react/jsx-no-literals': ['off'],
+    'react/jsx-no-bind': ['off'],
   },
 };
