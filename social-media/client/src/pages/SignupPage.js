@@ -1,16 +1,18 @@
+import { useSelector, useDispatch } from 'react-redux';
+
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../provider/authProvider';
 
 function SignupPage() {
-  const { currentUser } = useAuth();
+  const { token } = useSelector((state) => state.auth);
+
   const [signupMessage, setSignupMessage] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
-    if (currentUser) {
+    if (token) {
       navigate('/posts', { replace: true });
     }
-  }, [navigate, currentUser]);
+  }, [navigate, token]);
   const handleSignup = async (e) => {
     e.preventDefault();
 

@@ -63,7 +63,10 @@ router.get('', validateToken, (req, res, next) => {
 router.get('/:id', validateToken, (req, res, next) => {
   Post.findById(req.params.id).then((post) => {
     if (post) {
-      res.status(200).json(post);
+      res.status(200).json({
+        message: 'Post fetched successfully!',
+        posts: post,
+      });
     } else {
       res.status(404).json({ message: 'Post not found!' });
     }

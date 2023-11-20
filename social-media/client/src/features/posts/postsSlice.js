@@ -14,6 +14,15 @@ export const getPosts = createAsyncThunk('posts/getPosts', async (token) => {
   return response.posts;
 });
 
+export const getPost = createAsyncThunk(
+  'posts/getPost',
+  async ({ token, postId }) => {
+    console.dir(`postId: ${postId}`);
+    const response = await api.get('posts', token, postId);
+    return response.post.json();
+  }
+);
+
 export const postPost = createAsyncThunk(
   'posts/postPost',
   async (body, token) => {

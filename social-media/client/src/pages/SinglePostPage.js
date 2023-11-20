@@ -1,41 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../provider/authProvider.js';
 import { useParams } from 'react-router-dom';
 
 function SinglePostPage() {
-  const [post, setPost] = useState({ text: '' });
-  const { currentUser } = useAuth();
-  const { token } = currentUser;
+  const { posts } = useSelector((state) => state.posts);
   const { postId } = useParams();
 
-  useEffect(
-    function getData() {
-      async function fetchPost() {
-        try {
-          const response = await fetch(
-            'http://localhost:8081/api/posts/' + postId,
-            {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + token,
-              },
-            }
-          );
-          const postData = await response.json();
-          setPost(postData);
-        } catch (e) {
-          console.log(e);
-        }
-      }
-      fetchPost();
-    },
-    [token, postId]
-  );
   return (
     <div>
-      <h1>{post ? post.text : ''}</h1>
+      {posts ? (
+        <p>{posts.find((post) => post._id === postId).text}</p>
+      ) : (
+        <p>Post not found</p>
+      )}
+
       <Link to="/posts">Return to list of posts</Link>
     </div>
   );

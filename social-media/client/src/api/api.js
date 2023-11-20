@@ -4,8 +4,8 @@ const API_URL = 'http://localhost:8081/api';
 
 export const api = {
   // make a get request to the server
-  get: async (url, token) => {
-    const response = await fetch(`${API_URL}/${url}`, {
+  get: async (url, token, postId) => {
+    const response = await fetch(`${API_URL}/${url}/${postId ? postId : ''}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
