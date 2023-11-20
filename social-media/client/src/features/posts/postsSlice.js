@@ -10,9 +10,18 @@ const initialState = {
 };
 
 export const getPosts = createAsyncThunk('posts/getPosts', async (token) => {
-  const response = await api.getPosts(token);
-  return response.data;
+  const response = await api.get('posts', token);
+  return response.posts;
 });
+
+export const postPost = createAsyncThunk(
+  'posts/postPost',
+  async (body, token) => {
+    console.log(`body: ${JSON.stringify(body)} token: ${token}`);
+    const response = await api.post('posts', token, body);
+    return response.json();
+  }
+);
 
 export const postsSlice = createSlice({
   name: 'posts',
@@ -20,6 +29,9 @@ export const postsSlice = createSlice({
   reducers: {
     setPosts: (state, action) => {
       state.posts = action.payload;
+    },
+    addPost: (state, action) => {
+      state.posts = [...state.posts, action.payload];
     },
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
@@ -30,4 +42,4 @@ export const postsSlice = createSlice({
   },
 });
 
-export const { setPosts, setIsLoading, setError } = postsSlice.actions;
+export const { setPosts, addPost, setIsLoading, setError } = postsSlice.actions;

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login, setToken, setUser } from '../features/auth/authSlice';
 import { useNavigate, Link } from 'react-router-dom';
+import { throttle } from 'lodash';
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ function LoginPage() {
   const [loginErr, setLoginErr] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = throttle(async (e) => {
     e.preventDefault();
     try {
       const data = await dispatch(login({ email, password }));
@@ -21,7 +22,7 @@ function LoginPage() {
     } catch (err) {
       setLoginErr(err.message);
     }
-  };
+  }, 2000);
 
   return (
     <div className="container">

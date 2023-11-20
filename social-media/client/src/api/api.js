@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:8081/api';
 export const api = {
   // make a get request to the server
   get: async (url, token) => {
-    const response = await fetch(url, {
+    const response = await fetch(`${API_URL}/${url}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -15,13 +15,14 @@ export const api = {
   },
   // make a post request to the server
   post: async (url, token, body) => {
-    const response = await fetch(url, {
+    console.dir(`body: ${JSON.stringify(body)}`);
+    const response = await fetch(`${API_URL}/${url}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body,
+      body: JSON.stringify(body),
     });
     const data = await response.json();
     return data;

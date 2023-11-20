@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useAuth } from '../provider/authProvider';
 
-function Signup() {
-  const { user } = useSelector((state) => state.auth);
+function SignupPage() {
+  const { currentUser } = useAuth();
   const [signupMessage, setSignupMessage] = useState(null);
   const navigate = useNavigate();
-
   useEffect(() => {
-    if (user) {
+    if (currentUser) {
       navigate('/posts', { replace: true });
     }
-  }, [navigate, user]);
+  }, [navigate, currentUser]);
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -93,4 +92,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignupPage;
