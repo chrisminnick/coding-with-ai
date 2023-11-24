@@ -12,20 +12,38 @@ function App() {
     setCounter(counter + 1);
   };
 
+  const unusedVariable = 'I am not used anywhere';
+
   return (
-    <div>
-      <h1>{title}</h1>
+      <div>
+          <h1>
+              {title}
+          </h1>
 
-      <p>
-        You clicked
-        {counter} times
-      </p>
+          <p>
+              You clicked
+              {counter}
 
-      <button onClick={incrementCounter} type="button">
-        Click me
-      </button>
-    </div>
+              {' '}
+              times
+          </p>
+
+          <button onClick={incrementCounter()}>
+              Click me
+          </button>
+      </div>
   );
+}
+
+function AnotherComponent(props) {
+  const [count] = useState(0);
+  useEffect(function persistForm() {
+    let userData = localStorage.getItem('data'); // userData is assigned but never used
+  });
+
+  return (<div>
+      {props.children}
+          </div>);
 }
 
 export default App;
