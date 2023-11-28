@@ -12,8 +12,8 @@ POST http://localhost:8081/api/user/login HTTP/1.1
 content-type: application/json
 
 {
-    "email": "testuser5@test.com",
-    "password": "testing123"
+    "email": "test@test.com",
+    "password": "test"
 }
 
 ###

@@ -61,7 +61,7 @@ async function getAIMove(message) {
       }),
     });
     const data = await response.json();
-    document.getElementById('message').innerHTML =
+    document.getElementById('message').innerText =
       data.response.choices[0].message.content;
     return data.response.choices[0].message.content;
   }

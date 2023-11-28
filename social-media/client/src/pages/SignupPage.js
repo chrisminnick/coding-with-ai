@@ -1,17 +1,18 @@
+import { useSelector, useDispatch } from 'react-redux';
+
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
-function Signup() {
-  const { user } = useSelector((state) => state.auth);
+function SignupPage() {
+  const { token } = useSelector((state) => state.auth);
+
   const [signupMessage, setSignupMessage] = useState(null);
   const navigate = useNavigate();
-
   useEffect(() => {
-    if (user) {
+    if (token) {
       navigate('/posts', { replace: true });
     }
-  }, [navigate, user]);
+  }, [navigate, token]);
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -93,4 +94,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignupPage;

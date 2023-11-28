@@ -1,6 +1,6 @@
 POST http://localhost:8081/api/posts HTTP/1.1
 content-type: application/json
-Authorization: Bearer [token here]
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTY5NjI3NDA3NSwiZXhwIjoxNjk2Mjc1ODc1fQ.uwEJCs3DQq5M2VwLX1_8I-0JfyoKcws1GCPpOZtlrO0
 
 {
     "text": "test post 1"
@@ -10,13 +10,13 @@ Authorization: Bearer [token here]
 
 GET http://localhost:8081/api/posts HTTP/1.1
 content-type: application/json
-Authorization: Bearer [token here]
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTY5NjI3NDA3NSwiZXhwIjoxNjk2Mjc1ODc1fQ.uwEJCs3DQq5M2VwLX1_8I-0JfyoKcws1GCPpOZtlrO0
 
 ###
 
-GET http://localhost:8081/api/posts/636683b6b7a919666cf935cd HTTP/1.1
+GET http://localhost:8081/api/posts/6366deab958ffe3d6193c34e HTTP/1.1
 content-type: application/json
-Authorization: Bearer [token here]
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTY5NjI3NDA3NSwiZXhwIjoxNjk2Mjc1ODc1fQ.uwEJCs3DQq5M2VwLX1_8I-0JfyoKcws1GCPpOZtlrO0
 
 ###
 

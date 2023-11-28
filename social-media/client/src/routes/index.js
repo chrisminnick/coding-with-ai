@@ -6,6 +6,7 @@ import SignupPage from '../pages/SignupPage';
 import LogoutPage from '../pages/LogoutPage';
 import HomePage from '../pages/HomePage';
 import PostsPage from '../pages/PostsPage';
+import SinglePostPage from '../pages/SinglePostPage';
 
 const Routes = () => {
   return (
@@ -16,6 +17,7 @@ const Routes = () => {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/posts" element={<ProtectedRoute />}>
         <Route path="/posts" element={<PostsPage />} />
+        <Route path="/posts/:postId" element={<SinglePostPage />} />
       </Route>
     </RouterRoutes>
   );
