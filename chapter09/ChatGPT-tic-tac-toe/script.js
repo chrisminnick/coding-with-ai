@@ -20,15 +20,15 @@ class TicTacToeGame {
       document
         .getElementById('start')
         .addEventListener('click', () => this.startNewGame());
-    });
 
-    let slider = document.getElementById('slider');
-    document.getElementById('difficulty').innerHTML =
-      'Level of difficulty: ' + slider.value;
-    slider.addEventListener('change', (e) => {
+      let slider = document.getElementById('slider');
       document.getElementById('difficulty').innerHTML =
-        'Level of difficulty: ' + e.target.value;
-      this.difficulty = e.target.value;
+        'Level of difficulty: ' + slider.value;
+      slider.addEventListener('change', (e) => {
+        document.getElementById('difficulty').innerHTML =
+          'Level of difficulty: ' + e.target.value;
+        this.difficulty = e.target.value;
+      });
     });
   }
   /**
@@ -197,4 +197,6 @@ class TicTacToeGame {
 }
 
 // Create a new game
-new TicTacToeGame();
+document.addEventListener('DOMContentLoaded', (event) => {
+  new TicTacToeGame();
+});
