@@ -1,4 +1,4 @@
-class TicTacToeGame {
+export class TicTacToeGame {
   constructor(difficulty = 10) {
     this.DEFAULT_DIFFICULTY = difficulty;
     this.board = ['', '', '', '', '', '', '', '', ''];
@@ -197,6 +197,4 @@ class TicTacToeGame {
 }
 
 // Create a new game
-document.addEventListener('DOMContentLoaded', (event) => {
-  new TicTacToeGame();
-});
+new TicTacToeGame();
