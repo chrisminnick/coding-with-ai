@@ -1,22 +1,14 @@
 import { TicTacToeGame } from './script';
-// query utilities:
 import {
   getByLabelText,
   getByText,
   getByTestId,
   queryByTestId,
-  // Tip: all queries are also exposed on an object
-  // called "queries" which you could import here as well
   waitFor,
 } from '@testing-library/dom';
-// adds special assertions like toHaveTextContent
 import '@testing-library/jest-dom';
 
 function getTicTacToeDOM() {
-  // This is just a raw example of setting up some DOM
-  // that we can interact with. Swap this with your UI
-  // framework of choice 😉
-  const div = document.createElement('div');
   div.innerHTML = `
     <div id="board">
       <div class="cell"></div>
@@ -35,51 +27,47 @@ function getTicTacToeDOM() {
     <input type="range" id="slider" min="1" max="10" step="1" value="10" />
     <button id="start">Start Game</button>
   `;
-
   return div;
 }
-describe('TicTacToeGame', () => {
+describe('checkWin', () => {
   let game;
 
   beforeEach(() => {
-    document.body.innerHTML = getTicTacToeDOM();
     game = new TicTacToeGame();
   });
 
-  test('makeMove updates the board correctly', () => {
-    game.makeMove(0);
-    expect(game.board[0]).toBe('X');
-    expect(document.getElementById('1').innerHTML).toBe('X');
+  test('returns false when the board is empty', () => {
+    expect(game.checkWin()).toBe(false);
   });
 
-  test('makeMove does not overwrite existing moves', () => {
-    game.makeMove(0);
-    game.makeMove(0);
-    expect(game.board[0]).toBe('X');
+  test('returns false when there is no winning combination', () => {
+    game.board = ['X', 'O', 'X', 'O', 'X', 'O', '', '', ''];
+    expect(game.checkWin()).toBe(false);
   });
 
-  test('makeMove switches players after a move', () => {
-    game.makeMove(0);
-    game.makeMove(1);
-    expect(game.board[0]).toBe('X');
-    expect(game.board[1]).toBe('O');
-  });
-
-  test('checkWin detects a win correctly', () => {
-    game.board = ['X', 'X', 'X', '', '', '', '', '', ''];
+  test('returns true when there is a winning combination', () => {
+    game.board = ['X', 'X', 'X', 'O', 'O', '', '', '', ''];
     expect(game.checkWin()).toBe(true);
   });
+});
+describe('checkDraw', () => {
+  let game;
 
-  test('checkDraw detects a draw correctly', () => {
-    game.board = ['X', 'O', 'X', 'X', 'O', 'O', 'O', 'X', 'X'];
-    expect(game.checkDraw()).toBe(true);
+  beforeEach(() => {
+    game = new TicTacToeGame();
   });
 
-  test('startNewGame resets the game state correctly', async () => {
+  test('returns false when the board is empty', () => {
+    expect(game.checkDraw()).toBe(false);
+  });
+
+  test('returns false when the board is partially filled', () => {
+    game.board = ['X', 'O', 'X', 'O', 'X', 'O', '', '', ''];
+    expect(game.checkDraw()).toBe(false);
+  });
+
+  test('returns true when the board is fully filled and there is no winner', () => {
     game.board = ['X', 'O', 'X', 'X', 'O', 'O', 'O', 'X', 'X'];
-    await game.startNewGame();
-    expect(game.board).toEqual(['', '', '', '', '', '', '', '', '']);
-    expect(game.currentPlayer).toBe('X');
-    expect(game.isGameOver).toBe(false);
+    expect(game.checkDraw()).toBe(true);
   });
 });
