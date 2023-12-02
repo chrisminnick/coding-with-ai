@@ -71,3 +71,37 @@ describe('checkDraw', () => {
     expect(game.checkDraw()).toBe(true);
   });
 });
+
+describe('clearBoardDisplay', () => {
+  let game;
+  let div;
+
+  beforeEach(() => {
+    game = new TicTacToeGame();
+    div = document.createElement('div');
+    document.body.appendChild(div);
+    div.innerHTML = `
+      <div class="cell">X</div>
+      <div class="cell">O</div>
+      <div class="cell">X</div>
+      <div class="cell">O</div>
+      <div class="cell">X</div>
+      <div class="cell">O</div>
+      <div class="cell">X</div>
+      <div class="cell">O</div>
+      <div class="cell">X</div>
+    `;
+  });
+
+  afterEach(() => {
+    document.body.removeChild(div);
+  });
+
+  test('clears all cells in the board', () => {
+    game.clearBoardDisplay();
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach((cell) => {
+      expect(cell.innerHTML).toBe('');
+    });
+  });
+});

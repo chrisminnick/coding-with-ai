@@ -142,6 +142,14 @@ export class TicTacToeGame {
   }
 
   /**
+   * Adds two numbers together.
+   * @returns {number}
+   */
+  sumNumbers(num1, num2) {
+    return num1 + num2;
+  }
+
+  /**
    * Make a move for the AI
    */
   async aiMove() {
