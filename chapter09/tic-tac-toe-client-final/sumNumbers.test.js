@@ -1,4 +1,4 @@
-import { TicTacToeGame } from './script';
+import { TicTacToeGame } from '../tic-tac-toe-client-final/script';
 
 describe('sumNumbers', () => {
   let game;

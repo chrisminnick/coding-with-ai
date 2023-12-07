@@ -3,6 +3,7 @@ export class TicTacToeGame {
     this.DEFAULT_DIFFICULTY = difficulty;
     this.board = ['', '', '', '', '', '', '', '', ''];
     this.currentPlayer = 'X';
+    this.totalGamesPlayed = 0;
     this.isGameOver = false;
     this.messageHistory = [];
     this.difficulty = this.DEFAULT_DIFFICULTY;
@@ -97,12 +98,10 @@ export class TicTacToeGame {
 
       if (this.checkWin()) {
         alert(this.currentPlayer + ' Wins!');
-        this.isGameOver = true;
         return;
       }
       if (this.checkDraw()) {
         alert('Draw!');
-        this.isGameOver = true;
         return;
       }
       this.aiMove(); // Player is X, AI is O
@@ -124,13 +123,14 @@ export class TicTacToeGame {
       [0, 4, 8],
       [2, 4, 6],
     ];
-    return winCombos.some((combo) => {
+    const win = winCombos.some((combo) => {
       return (
         this.board[combo[0]] &&
         this.board[combo[0]] === this.board[combo[1]] &&
         this.board[combo[0]] === this.board[combo[2]]
       );
     });
+    return win;
   }
 
   /**
@@ -138,7 +138,8 @@ export class TicTacToeGame {
    * @returns {boolean}
    */
   checkDraw() {
-    return this.board.every((cell) => cell !== '');
+    const draw = this.board.every((cell) => cell !== '');
+    return draw;
   }
 
   /**
@@ -160,7 +161,6 @@ export class TicTacToeGame {
     document.getElementsByClassName('cell')[move].innerHTML = 'O';
     if (this.checkWin()) {
       alert('O Wins!');
-      this.isGameOver = true;
     }
   }
 
@@ -196,10 +196,10 @@ export class TicTacToeGame {
       return data.response.choices[0].message.content;
     }
     let randomMove = Math.floor(Math.random() * 9);
-    while (this.board[move] !== '') {
+    while (this.board[randomMove] !== '') {
       randomMove = Math.floor(Math.random() * 9);
     }
-    document.getElementById('message').innerHTML = move.toString();
+    document.getElementById('message').innerHTML = randomMove.toString();
     return randomMove.toString();
   }
 }

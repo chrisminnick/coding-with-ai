@@ -1,34 +1,5 @@
 import { TicTacToeGame } from './script';
-import {
-  getByLabelText,
-  getByText,
-  getByTestId,
-  queryByTestId,
-  waitFor,
-} from '@testing-library/dom';
-import '@testing-library/jest-dom';
 
-function getTicTacToeDOM() {
-  div.innerHTML = `
-    <div id="board">
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-      <div class="cell"></div>
-    </div>
-    AI Move:
-    <div id="message"></div>
-    <span id="difficulty">Level of difficulty:</span>
-    <input type="range" id="slider" min="1" max="10" step="1" value="10" />
-    <button id="start">Start Game</button>
-  `;
-  return div;
-}
 describe('checkWin', () => {
   let game;
 
@@ -103,5 +74,30 @@ describe('clearBoardDisplay', () => {
     cells.forEach((cell) => {
       expect(cell.innerHTML).toBe('');
     });
+  });
+});
+
+describe('Game stats', () => {
+  let game;
+  beforeEach(() => {
+    game = new TicTacToeGame();
+  });
+  test('increments total games played after a game ends', () => {
+    expect(game.totalGamesPlayed).toBe(0);
+    game.endGame();
+    expect(game.totalGamesPlayed).toBe(1);
+  });
+});
+
+describe('Game end', () => {
+  let game;
+  beforeEach(() => {
+    game = new TicTacToeGame();
+  });
+  test('set isGameOver to true after a player wins', () => {
+    expect(game.isGameOver).toBe(false);
+    game.board = ['X', 'X', 'X', 'O', 'O', '', '', '', ''];
+    game.checkWin();
+    expect(game.isGameOver).toBe(true);
   });
 });
