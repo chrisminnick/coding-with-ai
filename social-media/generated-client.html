@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create New User</title>
+    <script>
+      function signupUser() {
+        var xhr = new XMLHttpRequest();
+        var url = 'http://localhost:8080/user/signup'; // Replace with your API's URL
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var jsonResponse = JSON.parse(xhr.responseText);
+            console.log('User created: ', jsonResponse);
+            alert('User successfully created!');
+          }
+        };
+
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var email = document.getElementById('email').value;
+
+        var userData = JSON.stringify({
+          username: username,
+          password: password,
+          email: email,
+        });
+
+        xhr.send(userData);
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Create New User</h2>
+    <form onsubmit="event.preventDefault(); signupUser();">
+      <label for="username">Username:</label><br />
+      <input type="text" id="username" name="username" required /><br />
+
+      <label for="password">Password:</label><br />
+      <input type="password" id="password" name="password" required /><br />
+
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <input type="submit" value="Create User" />
+    </form>
+  </body>
+</html>

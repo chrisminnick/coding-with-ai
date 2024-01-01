@@ -51,13 +51,14 @@ router.post('/login', async (req, res) => {
         res.status(401).json({
           message: 'Incorrect password',
         });
-      }
-      const accessToken = generateAccessToken({ user: req.body.email });
+      } else {
+        const accessToken = generateAccessToken({ user: req.body.email });
 
-      res.status(200).json({
-        accessToken: accessToken,
-        userId: user._id,
-      });
+        res.status(200).json({
+          accessToken: accessToken,
+          userId: user._id,
+        });
+      }
     }
   } catch (err) {
     res.status(500).json({

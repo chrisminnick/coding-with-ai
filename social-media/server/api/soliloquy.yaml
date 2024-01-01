@@ -1,0 +1,101 @@
+openapi: '3.0.0'
+info:
+  version: '1.0.0'
+  title: 'Soliloquy Server API'
+servers:
+  - url: 'http://localhost:8081/api'
+paths:
+  /posts:
+    get:
+      summary: 'Get all posts'
+      operationId: 'getPosts'
+      responses:
+        '200':
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/Post'
+    post:
+      summary: 'Create a new post'
+      operationId: 'createPost'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          description: 'Post created successfully'
+  /posts/{id}:
+    put:
+      summary: 'Update a post'
+      operationId: 'updatePost'
+      parameters:
+        - name: 'id'
+          in: 'path'
+          required: true
+          schema:
+            type: 'string'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: 'Post updated successfully'
+    delete:
+      summary: 'Delete a post'
+      operationId: 'deletePost'
+      parameters:
+        - name: 'id'
+          in: 'path'
+          required: true
+          schema:
+            type: 'string'
+      responses:
+        '200':
+          description: 'Post deleted successfully'
+  /user/signup:
+    post:
+      summary: 'Sign up a new user'
+      operationId: 'signupUser'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: 'User signed up successfully'
+  /user/login:
+    post:
+      summary: 'Log in a user'
+      operationId: 'loginUser'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: 'User logged in successfully'
+components:
+  schemas:
+    Post:
+      type: 'object'
+      properties:
+        id:
+          type: 'string'
+        text:
+          type: 'string'
+    User:
+      type: 'object'
+      properties:
+        email:
+          type: 'string'
+        password:
+          type: 'string'
