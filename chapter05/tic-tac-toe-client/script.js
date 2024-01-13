@@ -65,9 +65,9 @@ async function getAIMove(message) {
       data.response.choices[0].message.content;
     return data.response.choices[0].message.content;
   }
-  let move = Math.floor(Math.random() * 9);
+  let move = Math.floor(Math.random() * 8);
   while (board[move] !== '') {
-    move = Math.floor(Math.random() * 9);
+    move = Math.floor(Math.random() * 8);
   }
   document.getElementById('message').innerHTML = move.toString();
   return move.toString();

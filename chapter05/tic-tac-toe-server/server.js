@@ -24,7 +24,7 @@ app.post('/chat', async (req, res) => {
     },
     {
       role: 'assistant',
-      content: 'new game, level 10',
+      content: 'new game',
     },
     {
       role: 'user',
