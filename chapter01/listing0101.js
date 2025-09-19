@@ -1,63 +1,75 @@
-// Simulated in-memory database for the todo-list
-const todoListDB = [];
+const mongoose = require('mongoose');
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost/todo-list', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// Define a TodoItem schema
+const todoItemSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  completed: Boolean,
+});
+
+// Create a TodoItem model
+const TodoItem = mongoose.model('TodoItem', todoItemSchema);
 
 // Function to Create a new todo item
-function createTodoItem(title, description) {
-  const newItem = {
-    id: todoListDB.length + 1,
+async function createTodoItem(title, description) {
+  const newItem = new TodoItem({
     title,
     description,
     completed: false,
-  };
+  });
 
-  todoListDB.push(newItem);
-  return newItem;
+  try {
+    await newItem.save();
+    return newItem;
+  } catch (error) {
+    throw error;
+  }
 }
 
 // Function to Read all todo items
-function getAllTodoItems() {
-  return todoListDB;
+async function getAllTodoItems() {
+  try {
+    const todoItems = await TodoItem.find();
+    return todoItems;
+  } catch (error) {
+    throw error;
+  }
 }
 
 // Function to Read a specific todo item by ID
-function getTodoItemById(id) {
-  const todoItem = todoListDB.find((item) => item.id === id);
-  return todoItem || null;
+async function getTodoItemById(id) {
+  try {
+    const todoItem = await TodoItem.findById(id);
+    return todoItem || null;
+  } catch (error) {
+    throw error;
+  }
 }
 
 // Function to Update a todo item by ID
-function updateTodoItem(id, updatedData) {
-  const todoItemIndex = todoListDB.findIndex((item) => item.id === id);
-
-  if (todoItemIndex !== -1) {
-    todoListDB[todoItemIndex] = {
-      ...todoListDB[todoItemIndex],
-      ...updatedData,
-    };
-    return todoListDB[todoItemIndex];
+async function updateTodoItem(id, updatedData) {
+  try {
+    const updatedItem = await TodoItem.findByIdAndUpdate(id, updatedData, {
+      new: true,
+    });
+    return updatedItem;
+  } catch (error) {
+    throw error;
   }
-
-  return null;
 }
 
 // Function to Delete a todo item by ID
-function deleteTodoItem(id) {
-  const todoItemIndex = todoListDB.findIndex((item) => item.id === id);
-
-  if (todoItemIndex !== -1) {
-    const deletedItem = todoListDB.splice(todoItemIndex, 1)[0];
-    return deletedItem;
+async function deleteTodoItem(id) {
+  try {
+    const deletedItem = await TodoItem.findByIdAndRemove(id);
+    return deletedItem || null;
+  } catch (error) {
+    throw error;
   }
-
-  return null;
 }
-
-// Example usage:
-createTodoItem('Buy groceries', 'Milk, eggs, and bread');
-createTodoItem('Finish project', 'Complete the coding task');
-console.log(getAllTodoItems());
-console.log(getTodoItemById(1));
-updateTodoItem(1, { completed: true });
-console.log(getAllTodoItems());
-deleteTodoItem(2);
-console.log(getAllTodoItems());

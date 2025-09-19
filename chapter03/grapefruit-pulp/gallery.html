@@ -1,0 +1,44 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Photo Gallery</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="gallery">
+      <img
+        class="photo"
+        src="image1.jpg"
+        alt="Photo 1"
+        onclick="openLightbox(0)"
+      />
+      <img
+        class="photo"
+        src="image2.jpg"
+        alt="Photo 2"
+        onclick="openLightbox(1)"
+      />
+      <img
+        class="photo"
+        src="image3.jpg"
+        alt="Photo 3"
+        onclick="openLightbox(2)"
+      />
+      <!-- Add more images here -->
+
+      <div class="lightbox" id="lightbox">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-photo" id="lightbox-photo" />
+      </div>
+
+      <button class="prev-btn" onclick="prevPhoto()">&lt;</button>
+      <button class="next-btn" onclick="nextPhoto()">&gt;</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
