@@ -187,9 +187,9 @@ class TicTacToeGame {
       messageElement.innerHTML = data.response.choices[0].message.content;
       return data.response.choices[0].message.content;
     }
-    let randomMove = Math.floor(Math.random() * 9);
+    let randomMove = Math.floor(Math.random() * 8);
     while (this.board[move] !== '') {
-      randomMove = Math.floor(Math.random() * 9);
+      randomMove = Math.floor(Math.random() * 8);
     }
     document.getElementById('message').innerHTML = move.toString();
     return randomMove.toString();
